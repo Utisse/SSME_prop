@@ -9,8 +9,8 @@ classdef stato
     end
     
     methods
-        function obj = stato_termodinamico(temperatura,pressione,portata)
-            %SOSTANZA_CHIMICA Construct an instance of this class
+        function obj = stato(temperatura,pressione,portata)
+            %STATO Construct an instance of this class
             %   Detailed explanation goes here
             obj.T = temperatura;
             obj.P = pressione;

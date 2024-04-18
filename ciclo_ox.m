@@ -1,7 +1,7 @@
 clear;clc;close all;
 
 % LO2 prevalve
-prevalve_LO2 = stato(90.3722,imp_to_met('p',100), 432.65);
+prevalve_LO2 = stato(90.3722,imp_to_met('p',100),432.65);
 k_prevalve = 0.01;
 
 % Turbopompa a bassa pressione
@@ -15,7 +15,7 @@ HPOTP = stato(104.2511,277.514,LPOTP.Q);
 
 % Qui la portata si divide
 % Parte va ad alimentare la pompa a bassa pressione
-LP_turbopump_ox_alimentazione = stato(imp_to_met('t',-272),imp_to_met('p',3801),imp_to_met('q',186));
+LPOTP_alimentazione = stato(imp_to_met('t',-272),imp_to_met('p',3801),imp_to_met('q',186));
 
 % Parte si riscalda tramite l'oxidizer heat exchanger
 % e diventa gassoso. Da questo punto in poi parte va 
@@ -28,5 +28,15 @@ POGO_suppression = stato(pressurizzazione_ET_ox.T,246.418625,0.09979);
 mcc_ox = stato(104.2611,240.2822,380.5637);
 
 % infine parte passa dai due precombustori
-%fuel_preburner_ox = stato(115.3722)
+in_precomb_f = stato(115.3722,366.11161,34.92658);
+in_precomb_ox = stato(115.3722,366.11161,11.3398);
+% preburner fuel
+precomb_f = stato(983.15,330.4657,67.5852);
+HPFTP_alimentazione = stato(859.2611,213.1169,67.585208);
+% preburner ox
+precomb_ox = stato(739.2611,331.77572,30.844256);
+HPOTP_alimentazione = stato(659.8167,213.6685,30.844256);
+
+% I gas combusti arrivano al HGM e poi finiscono nella mcc
+
 
