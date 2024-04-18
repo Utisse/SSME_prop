@@ -1,5 +1,5 @@
-classdef stato_termodinamico
-    %STATO_TERMODINAMICO Classe per raggruppare temp, press e portata
+classdef stato
+    %STATO Classe per raggruppare temp, press e portata
     %   
     
     properties
