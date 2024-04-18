@@ -1,6 +1,6 @@
 classdef stato_termodinamico
-    %STATO_TERMODINAMICO Summary of this class goes here
-    %   Detailed explanation goes here
+    %STATO_TERMODINAMICO Classe per raggruppare temp, press e portata
+    %   
     
     properties
         T;
