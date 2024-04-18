@@ -1,16 +1,17 @@
 clear;clc;close all;
 
 % LO2 prevalve
-prevalve = stato_termodinamico(imp_to_met('p',100), 90.3722,432.65);
+prevalve_LO2 = stato_termodinamico(imp_to_met('p',100), 90.3722,432.65);
 k_prevalve = 0.01;
 
 % Turbopompa a bassa pressione
-eta_lpotp = 0.677;
-beta_lfotp = 00000;
-LP_turbopump_ox = stato_termodinamico(93.70556,29.0958,508.023); 
+eta_LPOTP = 0.677;
+beta_LPOTP = 417/100;
+LPOTP = stato_termodinamico(93.70556,29.0958,508.023); 
+DP_LPOTP = LPOTP.T - imp_to_met('p',417);
 
 % Turbopompa ad alta pressione
-HP_turbopump_ox = stato_termodinamico(104.2511,277.514,LP_turbopump_ox.Q);
+HPOTP = stato_termodinamico(104.2511,277.514,LPOTP.Q);
 
 % Qui la portata si divide
 % Parte va ad alimentare la pompa a bassa pressione
