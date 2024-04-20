@@ -11,6 +11,13 @@ LPOTP = stato(93.70556,29.0958,508.023);
 DP_LPOTP = LPOTP.T - imp_to_met('p',417);
 
 % Turbopompa ad alta pressione
+% qui ho due entrate e due uscite:
+% il primo input è il LOX che viene dalla LPOTP
+% il secondo input viene spillato da il LOX che sta andando alla mcc
+% il primo output è verso la mcc
+% il secondo output invece va ai precombustori
+eta_HPOTP = .746;
+beta_HPOTP = 0 ; 
 HPOTP = stato(104.2511,277.514,LPOTP.Q);
 
 % Qui la portata si divide
@@ -37,6 +44,6 @@ HPFTP_alimentazione = stato(859.2611,213.1169,67.585208);
 precomb_ox = stato(739.2611,331.77572,30.844256);
 HPOTP_alimentazione = stato(659.8167,213.6685,30.844256);
 
-% I gas combusti arrivano al HGM e poi finiscono nella mcc
+% I gas combusti arrivano al hot gas manifold e poi finiscono nella mcc
 
 
