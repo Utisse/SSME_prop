@@ -50,9 +50,10 @@ eff = eta_lpftp ;
 PR = beta_lpftp ;
 P_inlet = p_in_f;
 T_inlet = t_in_f ;
-gamma = 1.4 ;
+gamma = 1.4 ;  %non sono sicuro sia corretto
 
 [p_1, t_1, p_2, t_2, mdot_2_f] = TurboPumpOperation(mdot, eff, PR, P_inlet, T_inlet, gamma)
+%la temperatura in uscita esce di 3K piu alta!!!
 
 %% 2 -> 3   LPFTP -> HPFTP
 % input
