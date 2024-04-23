@@ -34,9 +34,9 @@ eta_hpftpt  = 0.811 ;
 hpftpt_P = 47.04; % [MW]
 hpftpt_speed = 34360 ; %[rpm] ~ 572.66 Hz
 
-% FUEL PREBURNER
+%% FUEL PREBURNER 
 d = 0.265  ;%[m]
-l = 0.11 ; %[m]
+l = 0.11 ; %[m] 
 O_F = 0.86 ;
 mdot_ox = 66.9 ;
 mdot_f = 77.7 ;
@@ -44,9 +44,33 @@ mdot_f = 77.7 ;
 
 
 %% 1 -> 2   INLET -> LPFTP
+% input
+mdot = mdot_in_f;
+eff = eta_lpftp ;
+PR = beta_lpftp ;
+P_inlet = p_in_f;
+T_inlet = t_in_f ;
+gamma = 1.4 ;  %non sono sicuro sia corretto
+
+[p_1, t_1, p_2, t_2, mdot_2_f] = TurboPumpOperation(mdot, eff, PR, P_inlet, T_inlet, gamma)
+%la temperatura in uscita esce di 3K piu alta!!!
 
 %% 2 -> 3   LPFTP -> HPFTP
+% input
+mdot = mdot_2_f;
+eff = eta_hpftp ;
+PR = beta_hpftp ;
+P_inlet = p_2;
+T_inlet = t_2;
+gamma = 1.4 ;
+
+[p_2, t_2, p_3, t_3] = TurboPumpOperation (mdot, eff, PR, P_inlet, T_inlet, gamma)
+
+
 %% 3 -> 4   HPFTP -> FMV
+mdot_f_mcc_cool =  ;
+mdot_f_noz_cool =  ;
+
 %% 4 -> 5   FMV -> MCC. COOLING
 %% 5 -> 6   MCC. COOLING -> LPFTP. T
 %% 6 -> 7   LPFTP. T -> HGM. COOLING
