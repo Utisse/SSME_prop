@@ -12,7 +12,7 @@ k = 0.01 ;  % fattore perdite di carico nei condotti (pressione)
   
 % LOW PRESSURE FUEL TURBOPUMP
 beta_lpftp = 9.933 ;
-eta_lptftp = 0.713 ;  
+eta_lpftp = 0.713 ;  
 mdot_lpftp = mdot_in_f ;
 
 % LOW PRESSURE FUEL TURBOPUMP TURBINE
@@ -49,8 +49,12 @@ mdot = mdot_in_f;
 eff = eta_lpftp ;
 PR = beta_lpftp ;
 P_inlet = p_in_f;
-T_inlet = t_in_f ;
-gamma = 1.4 ;  %non sono sicuro sia corretto
+T_inlet = t_in_f; 
+% da https://shorturl.at/moqEI trovo i dati per il Cp e Cv a temperatura
+% vicina a quella richiesta.
+cp_f = 20.076;
+cv_f = 11.545;
+gamma = cp_f/cv_f
 
 [p_1, t_1, p_2, t_2, mdot_2_f] = TurboPumpOperation(mdot, eff, PR, P_inlet, T_inlet, gamma)
 %la temperatura in uscita esce di 3K piu alta!!!
@@ -62,14 +66,13 @@ eff = eta_hpftp ;
 PR = beta_hpftp ;
 P_inlet = p_2;
 T_inlet = t_2;
-gamma = 1.4 ;
 
 [p_2, t_2, p_3, t_3] = TurboPumpOperation (mdot, eff, PR, P_inlet, T_inlet, gamma)
 
 
 %% 3 -> 4   HPFTP -> FMV
-mdot_f_mcc_cool =  ;
-mdot_f_noz_cool =  ;
+%% mdot_f_mcc_cool =  ;
+%% mdot_f_noz_cool =  ;
 
 %% 4 -> 5   FMV -> MCC. COOLING
 %% 5 -> 6   MCC. COOLING -> LPFTP. T

@@ -1,6 +1,5 @@
 function [P_in, T_in, P_out, T_out, mdot_out] = TurboPumpOperation(mdot, eff, PR, P_inlet, T_inlet, gamma)
     % Dati di design
-    R = 287; % Costante specifica del gas [J/(kg*K)]
     
     % Efficienza delle turbopompe
     eta_pump = eff;
