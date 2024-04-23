@@ -54,7 +54,7 @@ T_inlet = t_in_f;
 % vicina a quella richiesta.
 cp_f = 20.076;
 cv_f = 11.545;
-gamma = cp_f/cv_f
+gamma = cp_f/cv_f;
 
 [p_1, t_1, p_2, t_2, mdot_2_f] = TurboPumpOperation(mdot, eff, PR, P_inlet, T_inlet, gamma)
 %la temperatura in uscita esce di 3K piu alta!!!
