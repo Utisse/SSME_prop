@@ -47,3 +47,7 @@ HPOTP_alimentazione = stato(659.8167,213.6685,30.844256);
 % I gas combusti arrivano al hot gas manifold e poi finiscono nella mcc
 
 
+%% 1 -> 2   INLET -> LPOTP
+gamma =1.4;
+[p2,t2] = TurboPumpOperation(eta_LPOTP,beta_LPOTP,prevalve_LO2.P,prevalve_LO2.T,gamma,LPOTP.T);
+punto2 = stato(t2,p2,prevalve_LO2.Q);

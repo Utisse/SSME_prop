@@ -1,6 +1,6 @@
 clc;
 close all; 
-clear all;
+clear;
 
 %% DATI
 
@@ -35,7 +35,7 @@ hpftpt_P = 47.04; % [MW]
 hpftpt_speed = 34360 ; %[rpm] ~ 572.66 Hz
 
 %% FUEL PREBURNER 
-d = 0.265  ;%[m]
+d = 0.265;%[m]
 l = 0.11 ; %[m] 
 O_F = 0.86 ;
 mdot_ox = 66.9 ;
@@ -56,18 +56,17 @@ cp_f = 20.076;
 cv_f = 11.545;
 gamma = cp_f/cv_f;
 
-[p_1, t_1, p_2, t_2, mdot_2_f] = TurboPumpOperation(mdot, eff, PR, P_inlet, T_inlet, gamma)
+[p_2, t_2] = TurboPumpOperation(eff, PR, P_inlet, T_inlet, gamma);
 %la temperatura in uscita esce di 3K piu alta!!!
 
 %% 2 -> 3   LPFTP -> HPFTP
 % input
-mdot = mdot_2_f;
 eff = eta_hpftp ;
 PR = beta_hpftp ;
 P_inlet = p_2;
 T_inlet = t_2;
 
-[p_2, t_2, p_3, t_3] = TurboPumpOperation (mdot, eff, PR, P_inlet, T_inlet, gamma)
+[p_3, t_3] = TurboPumpOperation ( eff, PR, P_inlet, T_inlet, gamma);
 
 
 %% 3 -> 4   HPFTP -> FMV
