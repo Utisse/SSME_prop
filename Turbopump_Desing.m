@@ -9,6 +9,8 @@ Ns = ceil(Dp/Dp_ps) ; % numero di stadi necessari alla pompa -> se <1 Ns = 1
 Dh = Pp/mdot ; % salto entalpico
 Dt= abs(Dh)/cp ;%variazione di temperatura-> molto meno importante dell'aumento della pressione
 T_out = Dt + T_in ;
+
+%errore in potenza/salto entalpico e Dt, probabile riguardi l'uso dell'efficienza
 Q = mdot/rho ;
 Vs = 3;
 % rivaluta
