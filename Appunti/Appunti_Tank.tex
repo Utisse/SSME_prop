@@ -1,9 +1,9 @@
-\documentclass[a4paper]{article}
 \input{../preamble.tex}
 \title{Appunti Tank}
 \begin{document}
     \maketitle
     \tableofcontents
+    \newpage
     \section{Volume del Tank}
     Il volume del tank deve essere maggiore di 
     quello del volume del propellente richiesto.
@@ -11,7 +11,7 @@
     Il tank è composto da 4 componenti:
     \begin{enumerate}
         \item $V_{pu}$: volume propellente (extra per emergenze).
-        \item $V_{ull}$: volume _libero_ per espansione del propellente o contrazione strutturale (.01/0.03).
+        \item $V_{ull}$: volume \it{libero} per espansione del propellente o contrazione strutturale (.01/0.03).
         \item $V_{bo}$: per criogenici, permette l'ebollizione a causa del rifonrnimento e dello scolo.
         \item $V_{trap}$: volume del propellente che rimane intrappolato nelle feed lines (tipicamente volume del feed system).  
     \end{enumerate}
@@ -35,13 +35,13 @@
     \begin{itemize}
         \item $p_b$: design bust pressure (in Pa).
         \item $f_s$: fattore sicurezza (2.0 per veicoli pressurizzati)
-        \item MEOP: Maximum Expected Operating Pressure del tank (Pa).
+        \item $\text{MEPP}$: Maximum Expected Operating Pressure del tank (Pa).
     \end{itemize}
     \question{Quale materiale? serve densità ($\rho$), sforzo elastico ($F_{tu}$).}
     Indice di merito: \[\frac{F_{tu}}{\rho g_0}\]
     Altre cose da considerare nel materiale sono interazione 
     chimica e lavorazione (controllare in appendice B).
-    \subsection{sezione cilindrica}
+    \subsection{Sezione cilindrica}
     \begin{eqnarray*}
         t_s = \frac{p_b r_s}{2 F_{all}}\\
         m_s = A_s t_s \rho_{mat}
@@ -53,7 +53,7 @@
         \item $V_s$ volume della sfera
         \item $t_s$ spessore
         \item $p_b$ DBP
-        \item $F_all$ sforzo elastico permesso
+        \item $F_{all}$ sforzo elastico permesso
         \item $m_s$ massa
         \item $\rho_{mat}$ densità del materiale
     \end{itemize}
@@ -88,8 +88,7 @@
         \item sistemi di espulsione passivi
         \item sistemi di espulsione positivi
     \end{itemize}
-    I primi meno costosi ed efficienti sfruttano la tensione superficiale del liquido, e sono dunque meno affidabili ma meno costosi e complicati
-    , mentre i secondi usano barriere fisiche, valvole, pistoni, diaframmi etc. e sono quindi più efficaci a scapito di costo e complessità.
+    I primi meno costosi ed efficienti sfruttano la tensione superficiale del liquido, e sono dunque meno affidabili ma meno costosi e complicati, mentre i secondi usano barriere fisiche, valvole, pistoni, diaframmi etc.\ e sono quindi più efficaci a scapito di costo e complessità.
     \question{PAGINA 299 e precedenti}
     Posso inoltre usare gas per pressurizzare 
     \end{document}

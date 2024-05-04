@@ -5,6 +5,7 @@
 %%%   DRACULA THEME
 %%%
 %\usepackage{/home/lorenzo/latex_dracula/draculatheme}
+\documentclass[a4paper]{article}
 %PACKAGES FOR TITLES
 \usepackage{titlesec}
 \usepackage{color}
@@ -53,11 +54,11 @@
 %	NEW COMMANDS DEFINED
 %-------------------------------------------------------------------------
 % EXAMPLES OF NEW COMMANDS -> here you see how to define new commands
-\newcommand{\e}[1]{\times 10^{#1}}  % Powers of 10 notation
+\newcommand{\e}[1]{\times{} 10^{#1}}  % Powers of 10 notation
 \newcommand{\mathbbm}[1]{\text{\usefont{U}{bbm}{m}{n}#1}} % From mathbbm.sty
 \newcommand{\pdev}[2]{\frac{\partial#1}{\partial#2}}
 \newcommand{\question}[1]{\colorbox{yellow}{#1}}
-\newcommand{\integral}[4]{\int_{#1}^{#2} #3 \,\,\diff #4}
+\newcommand{\integral}[4]{\int_{#1}^{#2} #3 \,\,\diff{} #4}
 \newcommand{\dermat}[2]{\frac{\operatorname{D}#1}{\operatorname{D}#2}}
 \newcommand{\abs}[1]{|#1|}
 \newcommand{\person}[1]{\textsf{#1}}
@@ -125,11 +126,11 @@
 % My name for when I print my lecture notes to use for an open book exam.
 % \fancyhead[LE,RO]{Lorenzo Pasqui}
 
-\fancyhead[RO,LE]{\@lecture} % Right odd,  Left even
-\fancyhead[RE,LO]{Lorenzo Pasqui}          % Right even, Left odd
+% \fancyhead[RO,LE]{\@lecture} % Right odd,  Left even
+\fancyhead[R]{Lorenzo Pasqui}          % Right even, Left odd
 
-\fancyfoot[RO,LE]{}  % Right odd,  Left even
-\fancyfoot[RE,LO]{}          % Right even, Left odd
+% \fancyfoot[RO,LE]{}  % Right odd,  Left even
+% \fancyfoot[RE,LO]{}          % Right even, Left odd
 \fancyfoot[C]{\thepage}     % Center
 
 \makeatother
@@ -149,18 +150,18 @@
 % \newpage}
 % \makeatother
 %  end of redefinition  ===============================  \pdfsuppresswarningpagegroup=1
-\logo{PoliLogo.svg}
+\logo{../download.png}
 \author{Lorenzo Pasqui}
-\newcommand{\myimage}{\includegraphics[width=0.5\textwidth]{PoliLogo}}
+\newcommand{\myimage}{\includegraphics[width=0.5\textwidth]{PoliLogo.svg}}
 \newcommand{\mytitlepage}[1]{%
-    \begin{center}
-        \myimage
-        \vspace{1cm} % Aggiungi spazio tra l'immagine e il titolo
-        \LARGE #1
-    \end{center}
+   \begin{center}
+       \myimage{}
+       \vspace{1cm} % Aggiungi spazio tra l'immagine e il titolo
+       \LARGE #1
+   \end{center}
 }
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: t
+%%% TeX-master: f
 %%% End:
