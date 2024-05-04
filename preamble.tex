@@ -1,0 +1,166 @@
+%------------------------------------------------------------------------------
+%	REQUIRED PACKAGES AND  CONFIGURATIONS
+%------------------------------------------------------------------------------
+%%%
+%%%   DRACULA THEME
+%%%
+%\usepackage{/home/lorenzo/latex_dracula/draculatheme}
+%PACKAGES FOR TITLES
+\usepackage{titlesec}
+\usepackage{color}
+\usepackage{titling}
+
+% PACKAGES FOR LANGUAGE AND FONT
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage[T1]{fontenc} % Font encoding
+
+%TIKZ 
+\usepackage{tikz}
+
+% TIKZ PACKAGES
+\usetikzlibrary{calc,patterns,angles,quotes}
+\usepackage{pgfplots}
+\pgfplotsset{compat = newest,width=6cm}
+\usetikzlibrary{patterns.meta,decorations.pathmorphing}
+
+% PACKAGES FOR IMAGES
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{import}
+\usepackage{cancel}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{xcolor}
+\usepackage{transparent}
+\newcommand{\incfig}[2]{%
+    \ifthenelse{\isempty{#2}}{%
+        \def\svgwidth{.75\columnwidth}
+    }{%
+        \def\svgwidth{#2\columnwidth}
+    }%
+    \import{./figures/}{#1.pdf_tex}
+}
+% PACKAGES FOR MATH
+\usepackage{amsmath}
+%\usepackage{siunitx}
+% PACKAGES FOR REFERENCES & BIBLIOGRAPHY
+\usepackage[colorlinks=true,linkcolor=blue!40!black,anchorcolor=black,citecolor=black,filecolor=black,menucolor=black,runcolor=black,urlcolor=black]{hyperref} % Adds clickable links at references
+\usepackage[italian]{cleveref}
+\pdfsuppresswarningpagegroup=1
+%-------------------------------------------------------------------------
+%	NEW COMMANDS DEFINED
+%-------------------------------------------------------------------------
+% EXAMPLES OF NEW COMMANDS -> here you see how to define new commands
+\newcommand{\e}[1]{\times 10^{#1}}  % Powers of 10 notation
+\newcommand{\mathbbm}[1]{\text{\usefont{U}{bbm}{m}{n}#1}} % From mathbbm.sty
+\newcommand{\pdev}[2]{\frac{\partial#1}{\partial#2}}
+\newcommand{\question}[1]{\colorbox{yellow}{#1}}
+\newcommand{\integral}[4]{\int_{#1}^{#2} #3 \,\,\diff #4}
+\newcommand{\dermat}[2]{\frac{\operatorname{D}#1}{\operatorname{D}#2}}
+\newcommand{\abs}[1]{|#1|}
+\newcommand{\person}[1]{\textsf{#1}}
+\newcommand{\R}{\mathbbm{R}}
+\newcommand{\costante}{\operatorname{cost}}
+%\newcommand{\ln}{\operatorname{ln}}
+\newcommand{\diff}{\operatorname{d}}
+\newcommand{\vvline}{||}
+\newcommand{\prodc}{\displaystyle\prod}
+\newcommand{\parallelsum}{\mathbin{/\mkern-5mu/}}
+\newcommand{\twomini}[2]{\begin{figure}[H]
+                \centering
+		\begin{minipage}{.5\linewidth}
+			#1
+		\end{minipage}
+		\begin{minipage}{.5\linewidth}
+			#2
+		\end{minipage}
+\end{figure}}
+\newcommand{\twominisw}[4]{\begin{figure}[H]
+                \centering
+		\begin{minipage}{#3\linewidth}
+			#1
+		\end{minipage}
+		\begin{minipage}{#4\linewidth}
+			#2
+		\end{minipage}
+              \end{figure}}
+            \newcommand{\threemini}[3]{\begin{figure}[H]
+                \centering
+                \begin{minipage}{.3\linewidth}
+			#1
+		\end{minipage}
+		\begin{minipage}{.3\linewidth}
+			#2
+		\end{minipage}
+		\begin{minipage}{.3\linewidth}
+			#3
+		\end{minipage}
+\end{figure}}
+%----------------------------------------------------------------------------
+%	COLOURS 
+%----------------------------------------------------------------------------
+\definecolor{darkorange}{RGB}{229, 112, 0}
+\definecolor{darkpurple}{RGB}{119, 25, 170}
+\usepackage{xifthen}
+\makeatother
+\def\@lecture{}%
+\newcommand{\lecture}[3]{
+    \ifthenelse{\isempty{#3}}{%
+        \def\@lecture{Lezione #1}%
+    }{%
+        \def\@lecture{Lezione #1: #3}%
+    }%
+    \subsection*{\@lecture}
+    \marginpar{\small\textsf{\mbox{#2}}}
+}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+% LE: left even
+% RO: right odd
+% CE, CO: center even, center odd
+% My name for when I print my lecture notes to use for an open book exam.
+% \fancyhead[LE,RO]{Lorenzo Pasqui}
+
+\fancyhead[RO,LE]{\@lecture} % Right odd,  Left even
+\fancyhead[RE,LO]{Lorenzo Pasqui}          % Right even, Left odd
+
+\fancyfoot[RO,LE]{}  % Right odd,  Left even
+\fancyfoot[RE,LO]{}          % Right even, Left odd
+\fancyfoot[C]{\thepage}     % Center
+
+\makeatother
+
+% redefinition of \maketitle with a logo ==============  
+\makeatletter
+\newcommand{\logo}[1]{\gdef\@logo{#1}}%
+% \def\maketitle{
+% \begin{center}
+% \setlength\baselineskip{8ex}
+% \setlength\parskip{4em plus 1fil minus 3em}
+% \includegraphics[width=\textwidth,
+% height=.6\textwidth,keepaspectratio]{\@logo}\par
+% {\Huge\sffamily\bfseries \@title}\par
+% {\Large\scshape \@author}\par
+% \end{center}
+% \newpage}
+% \makeatother
+%  end of redefinition  ===============================  \pdfsuppresswarningpagegroup=1
+\logo{PoliLogo.svg}
+\author{Lorenzo Pasqui}
+\newcommand{\myimage}{\includegraphics[width=0.5\textwidth]{PoliLogo}}
+\newcommand{\mytitlepage}[1]{%
+    \begin{center}
+        \myimage
+        \vspace{1cm} % Aggiungi spazio tra l'immagine e il titolo
+        \LARGE #1
+    \end{center}
+}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

@@ -1,0 +1,41 @@
+\documentclass[a4paper]{article}
+\input{../preamble.tex}
+\title{Appunti Tank}
+\begin{document}
+    \maketitle
+    \tableofcontents
+    \section{Volume del Tank}
+    Il volume del tank deve essere maggiore di 
+    quello del volume del propellente richiesto.
+
+    Il tank è composto da 4 componenti:
+    \begin{enumerate}
+        \item $V_{pu}$: volume propellente (extra per emergenze).
+        \item $V_{ull}$: volume _libero_ per espansione del propellente o contrazione strutturale (.01/0.03).
+        \item $V_{bo}$: per criogenici, permette l'ebollizione a causa del rifonrnimento e dello scolo.
+        \item $V_{trap}$: volume del propellente che rimane intrappolato nelle feed lines (tipicamente volume del feed system).  
+    \end{enumerate}
+    Dunque: 
+    \[V_{tot} = V_{pu} + V_{ull} + V_{bo} + V_{trap}\]
+    \section{Forma del Tank}
+    Di solito sono: 
+    \begin{itemize}
+        \item Sferici
+        \item Cilindrici
+    \end{itemize}
+    I primi massimizzano il volume rispetto all'area, ma i cilindrici hanno forma 
+    migliore per razzi e migliorano la rigidità strutturale.
+    
+    La pressione ha il maggior effetto sui limiti strutturali del tank. Per il design
+    preliminare consideriamo solo i carichi di pressione:
+
+    La design burst pressure del tank è:
+    \[p_b = f_s \text{MEOP}\]
+    con: 
+    \begin{itemize}
+        \item $p_b$: design bust pressure (in Pa).
+        \item $f_s$: fattore sicurezza (2.0 per veicoli pressurizzati)
+        \item MEOP: Maximum Expected Operating Pressure del tank (Pa).
+    \end{itemize}
+    \question{Quale materiale? serve densità, sforzo}
+\end{document}
