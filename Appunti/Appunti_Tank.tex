@@ -37,5 +37,59 @@
         \item $f_s$: fattore sicurezza (2.0 per veicoli pressurizzati)
         \item MEOP: Maximum Expected Operating Pressure del tank (Pa).
     \end{itemize}
-    \question{Quale materiale? serve densità, sforzo}
-\end{document}
+    \question{Quale materiale? serve densità ($\rho$), sforzo elastico ($F_{tu}$).}
+    Indice di merito: \[\frac{F_{tu}}{\rho g_0}\]
+    Altre cose da considerare nel materiale sono interazione 
+    chimica e lavorazione (controllare in appendice B).
+    \subsection{sezione cilindrica}
+    \begin{eqnarray*}
+        t_s = \frac{p_b r_s}{2 F_{all}}\\
+        m_s = A_s t_s \rho_{mat}
+    \end{eqnarray*}
+    con: 
+    \begin{itemize}
+        \item $r_s$ raggio della sfera
+        \item $A_s$ superficie della sfera
+        \item $V_s$ volume della sfera
+        \item $t_s$ spessore
+        \item $p_b$ DBP
+        \item $F_all$ sforzo elastico permesso
+        \item $m_s$ massa
+        \item $\rho_{mat}$ densità del materiale
+    \end{itemize}
+    \subsection{Sezione sferica}
+    \begin{eqnarray*}
+        t_c = \frac{p_b r_c}{F_{all}}\\
+        m_c = A_c t_c \rho_{mat}
+    \end{eqnarray*}
+    \subsubsection{Parti finali cilindriche}
+    Non abbiamo ellissi perchè lo sforzo sul punto di contatto tra 
+    ellissi e cilindro si formano sforzi alti. Abbiamo calotte sferiche.
+    Non considerando i diversi loads dati da altri fattori che non siano la 
+    pressione interna sottostimiamo di circa 2/2.5 volte.
+    \section{Stima della massa con il metodo pV/W}
+    Approccio puramente empirico. Considero $\phi_{tank}$, fattore della massa del tank:
+    \begin{equation*}
+        \phi_{tank} = \frac{p_b V_{tot}}{g_0 m_{tank}}
+    \end{equation*}
+    \emph{Per tank completamente metallici questo valore è 2500 metri!!}
+    Posso quindi risolvere per la massa del tank.
+    \subsection{Isolazione termica}
+    Devo isolare liquidi criogenici o propellenti che potrebbero congelarsi in orbita. 
+    Di solito questo è fatto tramite una lamina di metallo che copre una schiuma isolante (oppure materiale non metallico a nido d'ape).
+    \subsection{Dispositivi di espulsione di cariburante}
+    I serbatoi devono essere in grado di fornire e controllare il propellente in tutte le fasi della missione. 
+    Parte di questa capacità deriva anche dalla rimozione di gas dal propellente che viene fornito al sistema propulsivo, e 
+    espellere parte del propellente per eliminare i residui. Oltre a questo devono essere evitate forze trasmesse dal propellente alla navicella
+    (slosh). Devo evitare che negli inlet finisca gas. 
+    
+    Posso avere: 
+    \begin{itemize}
+        \item sistemi di espulsione passivi
+        \item sistemi di espulsione positivi
+    \end{itemize}
+    I primi meno costosi ed efficienti sfruttano la tensione superficiale del liquido, e sono dunque meno affidabili ma meno costosi e complicati
+    , mentre i secondi usano barriere fisiche, valvole, pistoni, diaframmi etc. e sono quindi più efficaci a scapito di costo e complessità.
+    \question{PAGINA 299 e precedenti}
+    Posso inoltre usare gas per pressurizzare 
+    \end{document}
