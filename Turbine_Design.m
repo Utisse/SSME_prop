@@ -1,4 +1,4 @@
-function  T_design= Turbine_Design (p_in,p_out,T_in,mdot,cp,cv,rho,P_req,eff_turb,eta_mecc_turb,eta_mecc_pump,U_m)
+function  T_design= Turbine_Design (p_in,p_out,T_in,mdot,cp,cv,rho,P_req,eff_turb,eta_mecc_turb,eta_mecc_pump,U_m,Vr_pump)
 
 % k perdite di pressione
 % Ns numero 
