@@ -12,21 +12,7 @@ function [V] = ExternalTank(V_prop,isCryo,MEOP,mm_prop,gamma,T_i,P_f,P_i)
     p_b = MEOP * f_s; %tank burst pressure
     F_all = 0.413; % ATTENZIONE VALORE PER Al 2219
     rho =2800; % ATTENZIONE VALORE PER Al 2219
-    r = 4.2; % Raggio del tank !!! DA CONTROLLARE, FORSE é ESTERNO E NON INTERNO.
     
-    %% calotte sferiche 
-    V_s = 4/3 * pi* r^3;
-    A_s = 4*pi * r^2;
-    s_s = p_b *r /(2*F_all);
-    m_s = A_s *s_s *rho;
-
-    %% Cilindro 
-    % lunghezza della sezione cilindrica
-    l_c = 15;
-    V_c = pi*r* l_c;
-    A_c = 2 * pi * r * l_c;
-    t_c = p_b * r /(F_all);
-    m_c = A_c * t_c * rho;
 
     % In teoria il volume del propellente =/= volume serbatoio
     % ma somma di V_prop + V_ullage (espansione) + V_boil + V_trapped (feed lines).
@@ -60,6 +46,24 @@ function [V] = ExternalTank(V_prop,isCryo,MEOP,mm_prop,gamma,T_i,P_f,P_i)
     end
     V = V_press(:) + V_tot;
     
+    
+    r = 4.2; % Raggio del tank !!! DA CONTROLLARE, FORSE é ESTERNO E NON INTERNO.
+    l_c = 15;
+
+    Volume_finale = V(end)
+
+    %% calotte sferiche 
+    V_sfera = 4/3 * pi* r^3;
+    A_sfera = 4*pi * r^2;
+    spessore_sfera = p_b *r /(2*F_all);
+    m_sfera = A_sfera *spessore_sfera *rho; 
+    %% Cilindro 
+    % lunghezza della sezione cilindrica
+    V_cilindro = pi*r* l_c;
+    A_cilindro = 2 * pi * r * l_c;
+    spessore_cilindro = p_b * r /(F_all);
+    m_cilindro = A_cilindro * spessore_cilindro * rho;
+
 %% PER TEST
 % ExternalTank(1514.6,true,900,1.00784,1.4,20.37222,206842.7184,21849485.82032)
 
