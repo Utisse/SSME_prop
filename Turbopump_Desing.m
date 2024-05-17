@@ -2,14 +2,14 @@ function tp_design = Turbopump_Desing (P_in, P_out,T_in, mdot, rho, P_vapor, eff
 
 Dp = P_out - P_in; % salto di pressione richiesto a cavallo della pompa [MPa]
 g = 9.81; % costante [m/s^2]
-if type == 0 
+if type == "f" 
     Dp_ps = 16 ; %[MPa] -> masssimo Dp (teorico) per singolo stadio per LH2 da libro "space prop. analysis and design (Humble)
     disp('fuel')
     Vs = 2.0; %stage specific speed per LH2
     u_ss = 130 ;% suction specific speed per LH2
     psi = 0.60 ;%pump head coefficient for LH2
 end
-if  type == 1 
+if  type == "o" 
     Dp_ps = 47 ;%[MPa] -> masssimo Dp (teorico) per singolo stadio per altri fluidi da libro "space prop. analysis and design (Humble)
     disp('Oxidizer')
     Vs = 3.0 ; % stage specific speed per altre specie;
