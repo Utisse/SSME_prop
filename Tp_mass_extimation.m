@@ -4,6 +4,9 @@ function tp_mass = Tp_mass_extimation (A, B, P_req, Vr)
 % conceptual design
 
 tau = P_req/Vr ; % pump shaft torque
-tp_mass = A * tau^B;
+A = linspace(1.2, 2.3, 10)
+B = linspace(0.600, 0.667, 10) ;
+tau_int  = tau.^B ;
+tp_mass = tau_int.*A ;
 
 end
