@@ -1,5 +1,5 @@
-function [V] = ExternalTank(V_prop,isCryo,MEOP,mm_prop,gamma,T_i,P_f,P_i)
-    % [V] = TANK(vol_prop,isCryo,MEPP,mm_prop,gamma,T_i,P_f,P_i)
+function [tank] = Tank_Design(V_prop,isCryo,MEOP,mm_prop,gamma,T_i,P_f,P_i)
+    % [tank] = Tank_Design(vol_prop,isCryo,MEPP,mm_prop,gamma,T_i,P_f,P_i)
     % Chiede volume del propellente, se è criogenico (TRUE o FALSE)
     % Maximum Operating Pressure,massa molare del propellente, 
     %  
@@ -33,18 +33,17 @@ function [V] = ExternalTank(V_prop,isCryo,MEOP,mm_prop,gamma,T_i,P_f,P_i)
     Ru = R / mm_pressurizzante;
     V_press = [];
     i = 1;
-    V_press(i) = V_tot;
+    V_press(1) = V_tot
     while 1
         i = i + 1;
-        V_press(i) = V_press(i-1) + V_tot;
-        m_press = V_press(i) *P_f /(Ru * T_f);
+        m_press = V_press(i-1) *P_f /(Ru * T_f);
         V_press(i) = m_press * Ru * T_f /P_f;
-        if or(abs(V_press(i) - V_press(i-1)) < 10^-5, i > 100000)
+        if or(abs(V_press(i) - V_press(i-1))  == 0, i > 100000)
             disp("Convergiamo");
             break;
         end
     end
-    V = V_press(:) + V_tot;
+    V = V_press;
     
     
     r = 4.2; % Raggio del tank !!! DA CONTROLLARE, FORSE é ESTERNO E NON INTERNO.
@@ -63,7 +62,8 @@ function [V] = ExternalTank(V_prop,isCryo,MEOP,mm_prop,gamma,T_i,P_f,P_i)
     A_cilindro = 2 * pi * r * l_c;
     spessore_cilindro = p_b * r /(F_all);
     m_cilindro = A_cilindro * spessore_cilindro * rho;
-
+    V_press = abs(V(end)- V_tot);
+    tank = Tank(V,V_press,T_f,P_f);
 %% PER TEST
-% ExternalTank(1514.6,true,900,1.00784,1.4,20.37222,206842.7184,21849485.82032)
+% Tank(1514.6,true,900,1.00784,1.4,20.37222,206842.7184,21849485.82032)
 
