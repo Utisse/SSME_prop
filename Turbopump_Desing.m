@@ -29,13 +29,13 @@ NPSH = (P_in - P_vapor)/(g*rho); % [m] Net Positive Suction Head-> misura per ev
 Vr_npsh = (u_ss*(NPSH^0.75))/sqrt(Q); % da usare se pompa preceduta da booster
 % -> per le seconde pompe è da usare questo? considero le prime dei
 % booster?
+Ns = 5018*pi/30 * sqrt(Q)/(H/n)^(.75)
 Vr = (Ns*(H/n)^0.75)/sqrt(Q); % [rad/s]
 % Se invece non è preceduto da booster va usato il valore minore
 if Vr > Vr_npsh
     disp('Uso valore alternativo di Vr');
-    Vr = Vr_npsh;
+    %Vr = Vr_npsh;
 end
-%Ns = 5018 * sqrt(Q)/(H/n)^(.75);
 
 
 V = 30*Vr/pi; % [rpm] -> trasformo da [rad/s] in [rpm] -> da verificare formula
@@ -53,8 +53,8 @@ D1t = (((4/pi)*Q)/(phi*Vr)/(1-L^2))^(1/3);% [m] inlet tip diameter
 
 %per i diametri non abbiamo un riferimento attendibile
 
-P_req = (g*mdot*H*10^(-6))/eff; %power required from the turbine to drive the pump
-Dh = P_req/mdot; % salto entalpico
+P_req = (g*mdot*H)/eff; %power required from the turbine to drive the pump
+Dh = P_req/mdot; % salto entalpico in J/kg
 Dt = Dh/cp; %variazione di temperatura-> molto meno importante dell'aumento della pressione
 %nei due passaggi precedenti c'è qualche errore
 T_out = Dt + T_in ;
@@ -72,7 +72,7 @@ tp_design.vel_rot_rpm = V ;
 tp_design.salto_entalpico = Dh ;
 tp_design.exit_tip_diameter_m = D2t ;
 tp_design.inlet_tip_diameter_m = D1t;
-tp_design.Power_required_MW = P_req ;
+tp_design.Power_required_MW = P_req * 10^-6 ;
 tp_design.pump_impeller_speed_mpersec = u_t ;
 
 end
