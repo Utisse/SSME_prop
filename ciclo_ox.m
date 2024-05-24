@@ -6,10 +6,10 @@ prevalve_LO2 = stato(90.3722,imp_to_met('p',100),432.65);
 
 % Turbopompa a bassa pressione
 eta_LPOTP = 0.677;
-beta_LPOTP = 417/100;
+beta_LPOTP = .417;
 LPOTP = stato(93.70556,29.0958,508.023); 
 % DP_LPOTP = LPOTP.T - imp_to_met('p',417);
-
+%%
 % Turbopompa ad alta pressione
 % qui ho due entrate e due uscite:
 % il primo input è il LOX che viene dalla LPOTP

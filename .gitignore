@@ -6,4 +6,5 @@
 *.out
 *.toc
 *.pdf
+*.asv
 test.m

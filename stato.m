@@ -19,11 +19,12 @@ classdef stato
             obj.T = temperatura;
             obj.P = pressione;
             obj.Q = portata;
-            obj.p_vap = pressione_di_vapore ;
-            obj.rho = densita;
-            obj.cv = cv ;
-            obj.cp = cp ;
-          
+            if nargin > 3
+                obj.p_vap = pressione_di_vapore ;
+                obj.rho = densita;
+                obj.cv = cv;
+                obj.cp = cp ;
+            end
         end
     end
 end
