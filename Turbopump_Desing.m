@@ -1,4 +1,4 @@
-function tp_design = Turbopump_Desing (P_in, P_out,T_in, mdot, rho, P_vapor, eff, cp, type)
+function tp_design = Turbopump_Desing (P_in, P_out,T_in, mdot, rho, P_vapor, eff, cp, type,rpm)
 
 g = 9.81; % costante (accelerazione gravitazionale) [m/s^2]
 
@@ -12,13 +12,11 @@ if type == 0
     Ns = 2.0; % stage specific speed per LH2
     u_ss = 130 ;% suction specific speed per LH2
     psi = 0.60 ;% pump head coefficient for LH2
-    rpm_presentazione = 15519;
     massa_molare = 1.007947;
 end
 if  type == 1 
     Dp_ps = 47e6 ; % [Pa] -> masssimo Dp (teorico) per singolo stadio per altri fluidi da libro "space prop. analysis and design" (Humble)
     disp('OXIDIZER LOX')
-    rpm_presentazione = 5018;
     Ns = 3.0 ; % [ - ] è adimensionale -> stage specific speed per altre specie;
     u_ss = 90; % suction specific speed for cryogenic liquids
     psi = 0.55 ; % pump head coefficient for others 
@@ -37,9 +35,9 @@ NPSH = (P_in - P_vapor)/(g*rho); % [m] Net Positive Suction Head-> misura per ev
 Vr_npsh = (u_ss*(NPSH^0.75))/sqrt(Q); % da usare se pompa preceduta da booster
 % -> per le seconde pompe è da usare questo? considero le prime dei
 % booster?
-if not(rpm_presentazione == 0)
+if not(rpm == 0)
     disp('sto usando i valori della presentazione per ricavare Ns')
-    Ns = rpm_presentazione*pi/30 * sqrt(Q)/(H/n)^(.75);
+    Ns = rpm*pi/30 * sqrt(Q)/(H/n)^(.75);
 end
 Vr = (Ns*(H/n)^0.75)/sqrt(Q); % [rad/s]
 % Se invece non è preceduto da booster va usato il valore minore
@@ -47,7 +45,7 @@ if Vr > Vr_npsh
     disp('Uso valore alternativo di Vr');
     Vr = Vr_npsh;
 end
-
+%Ns = Vr *sqrt(Q)/(H/n)^(.75);
 
 V = 30*Vr/pi; % [rpm] -> trasformo da [rad/s] in [rpm] -> da verificare formula
 % Vs = Vr*sqrt(Q)/((H/Ns)^0.75) ;  % [rad/s]? -> stage specific speed rivalutata -> serve a valutare efficienza -> usa grafico
