@@ -56,7 +56,7 @@ cp_f = 20.076;
 cv_f = 11.545;
 gamma = cp_f/cv_f;
 
-[p_2, t_2] = TurboPumpOperation(eff, PR, P_inlet, T_inlet, gamma);
+[p_2, t_2] = Turbopump_Desing(eff, PR, P_inlet, T_inlet, gamma);
 %la temperatura in uscita esce di 3K piu alta!!!
 
 %% 2 -> 3   LPFTP -> HPFTP
