@@ -1,6 +1,5 @@
 classdef Tank
-    %Tank Classe che riassume i dettagli del tank
-    %   Detailed explanation goes here
+    %TANK Classe che riassume i dettagli del tank
 
     properties
         V_tank;
@@ -11,14 +10,13 @@ classdef Tank
     end
 
     methods
-        function obj = Tank(TankVolume,Pressurizer_Volume,Tank_Temperature, ...
-                Tank_Pressure)
+        function obj = Tank(tankVolume,Pressurizer_Volume,tank_Temperature, tank_Pressure)
         %UNTITLED Construct an instance of this class
         %   Detailed explanation goes here
-        obj.V_tank = TankVolume;
+        obj.V_tank = tankVolume;
         obj.V_press =Pressurizer_Volume;
-        obj.T_tank = Tank_Temperature;
-        obj.P_tank = Tank_Pressure;
+        obj.T_tank = tank_Temperature;
+        obj.P_tank = tank_Pressure;
         end
     end
 end
