@@ -8,6 +8,7 @@ prevalve_LO2 = stato(90.3722,imp_to_met('p',100),432.65);
 eta_LPOTP = 0.677;
 beta_LPOTP = .417;
 LPOTP = stato(93.70556,29.0958,508.023); 
+turbopump_design(prevalve_LO2.P,LPOTP_stato.P,prevalve_LO2.T,prevalve_LO2.Q,rho,P_vaport,eta,cp,"ox",
 % DP_LPOTP = LPOTP.T - imp_to_met('p',417);
 %%
 % Turbopompa ad alta pressione
