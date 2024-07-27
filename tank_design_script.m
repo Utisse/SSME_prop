@@ -1,10 +1,7 @@
-function [tank] = tank_design(V_prop,isCryo,MEOP,mm_prop,gamma,T_i,P_f,P_i,of)
-    % [tank] = tank_design(vol_prop,isCryo,MEPP,mm_prop,gamma,T_i,P_f,P_i)
-    % Chiede volume del propellente, se è criogenico (TRUE o FALSE)
-    % Maximum Operating Pressure,massa molare del propellente, 
-    % del materiale e restituisce V, il volume
+%%
+clear;clc;close all;
 
-    g0 = 9.81;
+g0 = 9.81;
     % Prendo come riferimento l'impulso totale dell'SSME
     % Spinta di un solo motore
     Thrust_sl = 1860e3; %[N]
@@ -16,26 +13,37 @@ function [tank] = tank_design(V_prop,isCryo,MEOP,mm_prop,gamma,T_i,P_f,P_i,of)
     I_sp = 366; %[s] sea level
     m_prop = I_tot/(I_sp * g0);
     of = 6.03;
+    LH.name = "Idrogeno";
     LH.m = m_prop/(1 + of);
     LH.temp = 20.3;
     LH.rho = 71.09070627519642;
     LH.pressure = 225e3;
     LH.volume = LH.m/LH.rho;
+    LH.cp = 9673.283384191343;
+    LH.cv = 5657.830299878916;
+    LH.gamma = LH.cp/LH.cv;
+
+
+    ox.name = "Ossigeno";
     ox.m = LH.m * of;
     ox.rho = 1141.4844624986936;
     ox.temp = 90.19;
     ox.pressure = 246e3;
     ox.volume = ox.m/ox.rho;
+    ox.cp = 1698.1015309831562;
+    ox.cv = 929.8734290792967;
+    ox.gamma = ox.cp/ox.cv;
     % In realtà questi due serbatoi sono più grandi poichè 
     % non tutto il propellente viene usato a fini propulsivi (i.e. va in
     % camera di combustione).
-
+    prop = [ox, LH];
     % Mantengo costante il raggio che suppongo essere tale
     % per questioni strutturali
     r = 8.4/2; %[m] 
     f_s_cryo = 2; % se il serbatioio contiene un fluido criogenico ho un 
                  % fattore di sicurezza pari a due
     %% VALORI strutturali del serbatoio
+    MEOP = 900;
     p_b = MEOP * f_s_cryo; %tank burst pressure
     F_all = 0.413; % ATTENZIONE VALORE PER Al 2219
     rho =2800; % ATTENZIONE VALORE PER Al 2219
@@ -46,6 +54,10 @@ function [tank] = tank_design(V_prop,isCryo,MEOP,mm_prop,gamma,T_i,P_f,P_i,of)
     % Come lo calcolo? per ora metto V_tot = V_prop + .02 * V_prop (vedi pagina 288)
     % considerando dunque solo i primi due termini
     %V_tot = V_prop + 0.02 *V_prop;
+    for i=1: length(prop)
+        p = prop(i);
+        p.m= 1.02* p.m;
+    end
     ox.m = ox.m *1.02;
     LH.m = LH.m *1.02;
     V_tot = ox.m + LH.m;
@@ -54,10 +66,14 @@ function [tank] = tank_design(V_prop,isCryo,MEOP,mm_prop,gamma,T_i,P_f,P_i,of)
     g_0 = 9.81;
 
     m_tank = p_b * V_tot /(g_0 * phi_tank); 
-
+    %%
     % Calcolo pressurizzante, questo passaggio in teoria mi avvicinerà ai
-    % valori reali 
-    T_f = T_i *(P_f/P_i)^((gamma - 1)/gamma);
+    % valori reali
+    for i=1: length(prop)
+        p = prop(i);
+        p.T_f = p.temp *(P_f/P_i)^((p.gamma - 1)/p.gamma);
+
+    end
     mm_pressurizzante = mm_prop; % Credo che in particolare nel STS sia corretto
     R = 8314;
     Ru = R / mm_pressurizzante;
@@ -93,6 +109,4 @@ function [tank] = tank_design(V_prop,isCryo,MEOP,mm_prop,gamma,T_i,P_f,P_i,of)
     m_cilindro = A_cilindro * spessore_cilindro * rho;
     V_press = abs(V(end)- V_tot);
     tank = Tank(V(end),V_press,T_f,P_f);
-%% PER TEST
-% Tank(1514.6,true,900,1.00784,1.4,20.37222,206842.7184,21849485.82032)
-
+    
