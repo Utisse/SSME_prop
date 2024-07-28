@@ -1,7 +1,7 @@
 %%
 clear;clc;close all;
 
-g0 = 9.81;
+    g0 = 9.81;
     % Prendo come riferimento l'impulso totale dell'SSME
     % Spinta di un solo motore
     Thrust_sl = 1860e3; %[N]
@@ -64,38 +64,47 @@ g0 = 9.81;
         p = prop(i);
         p.m= 1.02* p.m;
     end
-    ox.m = ox.m *1.02;
-    LH.m = LH.m *1.02;
-    V_tot = ox.m + LH.m;
     % uso il metodo pV/W 
-    phi_tank = 2500; % [m], tipicamente per serbatoi metallici
-    g_0 = 9.81;
+    % phi_tank = 2500; % [m], tipicamente per serbatoi metallici
+    % g_0 = 9.81;
     R = 8314;
-    m_tank = p_b * V_tot /(g_0 * phi_tank); 
     %%
     % Calcolo pressurizzante, questo passaggio in teoria mi avvicinerà ai
     % valori reali.
-    for i=1: length(prop) % Eseguo il calcolo per ogni propellente
-        p = prop(i);
-        disp(" --- "+ p.name+ " ---");
-        press_volume = 0;
-        press_volume_old = -1000;
-        iter = 1;
-        Ru = R/p.massa_molare;  
-        % Considero un lungo burn time e dunque una trasformazione
-        % isoentropica
-        T_f = p.temp * (p.Ppress/p.pressure)^(1-p.gamma)/p.gamma
+    for i = 1:length(prop) % Eseguo il calcolo per ogni propellente
+    p = prop(i);
+    disp(" --- " + p.name + " ---");
+    
+    press_volume = 0;
+    press_volume_old = 0;
+    iter = 1;
+    Ru = R / p.massa_molare;
+    
+    % Considero un lungo burn time e dunque una trasformazione isoentropica
+    T_f = p.Tpress * (p.pressure / p.Ppress)^((p.gamma - 1) / p.gamma)
+    
         while 1
             iter = iter + 1;
+            
+            % Aggiustiamo il volume totale del serbatoio
             p.volume = press_volume + p.volume;
-            press_mass =  p.volume* p.pressure /(Ru * T_f);
-            press_volume = press_mass * (Ru * p.temp)/p.pressure;
-            if or(abs(press_volume - press_volume_old) < 1e-5, i > 1000)
-            disp("Convergiamo a iterazione = "+ i);
-            disp("Volume pressurizzante = " + press_volume);
-            break;
+            
+            % Calcoliamo la massa del gas pressurizzante
+            press_mass = p.volume * p.pressure / (Ru * T_f);
+            
+            % Calcoliamo il nuovo volume del gas pressurizzante
+            new_press_volume = press_mass * Ru * p.temp / p.pressure;
+
+            % Verifichiamo la condizione di convergenza
+            if abs(new_press_volume - press_volume_old) < 1e-5 || iter > 1000
+                disp("Convergiamo a iterazione = " + iter);
+                disp("Volume pressurizzante = " + new_press_volume);
+                break;
             end
+        
+        % Aggiorniamo il volume e la vecchia iterazione
             press_volume_old = press_volume;
+            press_volume = new_press_volume;
         end
     end
     %% calotte sferiche 
