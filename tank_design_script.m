@@ -16,23 +16,29 @@ g0 = 9.81;
     LH.name = "Idrogeno";
     LH.m = m_prop/(1 + of);
     LH.temp = 20.3;
+    LH.Tpress =   255.3722;
+    LH.Ppress =    2.1849e+07; %un po' altino ma probabilmente ok
     LH.rho = 71.09070627519642;
     LH.pressure = 225e3;
     LH.volume = LH.m/LH.rho;
     LH.cp = 9673.283384191343;
     LH.cv = 5657.830299878916;
     LH.gamma = LH.cp/LH.cv;
+    LH.massa_molare =  1.00784*2;
 
 
     ox.name = "Ossigeno";
     ox.m = LH.m * of;
     ox.rho = 1141.4844624986936;
     ox.temp = 90.19;
+    ox.Tpress = 448.7056;
+    ox.Ppress = 2.4607e+07;
     ox.pressure = 246e3;
     ox.volume = ox.m/ox.rho;
     ox.cp = 1698.1015309831562;
     ox.cv = 929.8734290792967;
     ox.gamma = ox.cp/ox.cv;
+    ox.massa_molare = 32;
     % In realtà questi due serbatoi sono più grandi poichè 
     % non tutto il propellente viene usato a fini propulsivi (i.e. va in
     % camera di combustione).
@@ -64,38 +70,34 @@ g0 = 9.81;
     % uso il metodo pV/W 
     phi_tank = 2500; % [m], tipicamente per serbatoi metallici
     g_0 = 9.81;
-
+    R = 8314;
     m_tank = p_b * V_tot /(g_0 * phi_tank); 
     %%
     % Calcolo pressurizzante, questo passaggio in teoria mi avvicinerà ai
-    % valori reali
-    for i=1: length(prop)
+    % valori reali.
+    for i=1: length(prop) % Eseguo il calcolo per ogni propellente
         p = prop(i);
-        p.T_f = p.temp *(P_f/P_i)^((p.gamma - 1)/p.gamma);
-
-    end
-    mm_pressurizzante = mm_prop; % Credo che in particolare nel STS sia corretto
-    R = 8314;
-    Ru = R / mm_pressurizzante;
-    V_press = [];
-    i = 1;
-    V_press(1) = V_tot;
-    while 1
-        i = i + 1;
-        m_press = V_press(i-1) *P_f /(Ru * T_f);
-        V_press(i) = m_press * Ru * T_f /P_f;
-        if or(abs(V_press(i) - V_press(i-1))  == 0, i > 100000)
+        disp(" --- "+ p.name+ " ---");
+        press_volume = 0;
+        press_volume_old = -1000;
+        iter = 1;
+        Ru = R/p.massa_molare;  
+        % Considero un lungo burn time e dunque una trasformazione
+        % isoentropica
+        T_f = p.temp * (p.Ppress/p.pressure)^(1-p.gamma)/p.gamma
+        while 1
+            iter = iter + 1;
+            p.volume = press_volume + p.volume;
+            press_mass =  p.volume* p.pressure /(Ru * T_f);
+            press_volume = press_mass * (Ru * p.temp)/p.pressure;
+            if or(abs(press_volume - press_volume_old) < 1e-5, i > 1000)
             disp("Convergiamo a iterazione = "+ i);
+            disp("Volume pressurizzante = " + press_volume);
             break;
+            end
+            press_volume_old = press_volume;
         end
     end
-    V = V_press;
-    
-    
-    l_c = 15;
-
-    Volume_finale = V(end);
-
     %% calotte sferiche 
     V_sfera = 4/3 * pi* r^3;
     A_sfera = 4*pi * r^2;
