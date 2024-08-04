@@ -1,4 +1,4 @@
-function [tank] = tank_design(V_prop,isCryo,MEOP,mm_prop,gamma,T_i,P_f,P_i,of)
+function [tank] = tank_design()
     % [tank] = tank_design(vol_prop,isCryo,MEPP,mm_prop,gamma,T_i,P_f,P_i)
     % Chiede volume del propellente, se è criogenico (TRUE o FALSE)
     % Maximum Operating Pressure,massa molare del propellente, 

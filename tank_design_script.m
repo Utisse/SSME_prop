@@ -25,8 +25,9 @@ clear;clc;close all;
     LH.cp = 9673.283384191343;
     LH.cv = 5657.830299878916;
     LH.gamma = LH.cp/LH.cv;
-    LH.gammaPress = 1.5102; 
+    LH.gammaPress = 1.4427; 
     LH.massa_molare =  1.00784*2;
+    LH.tank = Tank(0,0,0,0,0);
 
 
     ox.name = "Ossigeno";
@@ -42,6 +43,8 @@ clear;clc;close all;
     ox.cv = 929.8734290792967;
     ox.gamma = ox.cp/ox.cv;
     ox.massa_molare = 32; %[kg/kmol]
+    ox.tank = Tank(0,0,0,0,0);
+
 
 
     % In realtà questi due serbatoi sono più grandi poichè 
@@ -60,32 +63,31 @@ clear;clc;close all;
     rho =2800; % ATTENZIONE VALORE PER Al 2219
     
 
+    
+    % uso il metodo pV/W 
+    % phi_tank = 2500; % [m], tipicamente per serbatoi metallici
+    % g_0 = 9.81;
+    R = 8314; %[m^3 Pa /(K kmol)]
+
+    for i = 1:length(prop) % Eseguo il calcolo per ogni propellente
+    p = prop(i);
+    disp(" --- " + p.name + " ---");
+    disp("Volume propulsivo = " + p.volume);
     % In teoria il volume del propellente =/= volume serbatoio
     % ma somma di V_prop + V_ullage (espansione) + V_boil + V_trapped (feed lines).
     % Come lo calcolo? per ora metto V_tot = V_prop + .02 * V_prop (vedi pagina 288)
     % considerando dunque solo i primi due termini
     %V_tot = V_prop + 0.02 *V_prop;
-    for i=1: length(prop)
-        p = prop(i);
-        p.m= 1.02* p.m;
-    end
-    % uso il metodo pV/W 
-    % phi_tank = 2500; % [m], tipicamente per serbatoi metallici
-    % g_0 = 9.81;
-    R = 8314; %[m^3 Pa /(K kmol)]
-    %%
-    % Calcolo pressurizzante, questo passaggio in teoria mi avvicinerà ai
-    % valori reali.
-    for i = 1:length(prop) % Eseguo il calcolo per ogni propellente
-    p = prop(i);
-    disp(" --- " + p.name + " ---");
+    p.volume= 1.02* p.volume;
+    disp("Volume totale escluso pressurizzante = " + p.volume);
     maxiter = 1000;
     press_volume = zeros(maxiter,1);
     iter = 2;
     Ru = R / p.massa_molare;
-    
+    % Calcolo pressurizzante, questo passaggio in teoria mi avvicinerà ai
+    % valori reali.
     % Considero un lungo burn time e dunque una trasformazione isoentropica
-    T_f = p.Tpress * (p.pressure / p.Ppress)^((p.gamma - 1) / p.gamma);
+    T_f = p.Tpress * (p.pressure / p.Ppress)^((p.gammaPress - 1) / p.gammaPress);
         while 1            
             press_volume(iter) = press_volume(iter-1) + p.volume;
 
@@ -99,30 +101,34 @@ clear;clc;close all;
             if check < 1e-10|| iter > maxiter
                 disp("Convergiamo a iterazione = " + iter);
                 disp("Volume pressurizzante = " + press_volume(iter));
-                disp("Temperatura finale = " + T_f)
-                disp("Differenza finale = "+ check)
+                %disp("Temperatura finale = " + T_f)
+                %disp("Differenza finale = "+ check)
                 break;
             end
         
         % Aggiorniamo il volume e la vecchia iterazione
             iter = iter + 1;
         end
-       
+     p.volume = p.volume + press_volume(iter);
+     disp("Volume finale = "+ p.volume)
 
+     % calotte sferiche 
+     V_sfera = 4/3 * pi* r^3;
+     A_sfera = 4*pi * r^2;
+     spessore_sfera = p_b *r /(2*F_all);
+     m_sfera = A_sfera *spessore_sfera *rho; 
+     % Cilindro 
+     % lunghezza della sezione cilindrica
+     V_cilindro = p.volume - V_sfera;
+     l_c = V_cilindro/(pi*r^2);
+     A_cilindro = 2 * pi * r * l_c;
+     spessore_cilindro = p_b * r /(F_all);
+     m_cilindro = A_cilindro * spessore_cilindro * rho;
+     tot_mass = m_cilindro + m_sfera;
+     tank_height = l_c + r*2
+     p.tank = Tank(p.volume,press_volume(iter),p.temp,p.pressure,tot_mass);
     end
 
     
-    %% calotte sferiche 
-%     V_sfera = 4/3 * pi* r^3;
-%     A_sfera = 4*pi * r^2;
-%     spessore_sfera = p_b *r /(2*F_all);
-%     m_sfera = A_sfera *spessore_sfera *rho; 
-%     %% Cilindro 
-    % lunghezza della sezione cilindrica
-%     V_cilindro = pi*r* l_c;
-%     A_cilindro = 2 * pi * r * l_c;
-%     spessore_cilindro = p_b * r /(F_all);
-%     m_cilindro = A_cilindro * spessore_cilindro * rho;
-%     V_press = abs(V(end)- V_tot);
-%     tank = Tank(V(end),V_press,T_f,P_f);
+   
 %     
