@@ -1,4 +1,4 @@
-function tp_design = Turbopump_Desing (P_in, P_out,T_in, mdot, rho, P_vapor, eff, cp, fluid, type)
+function tp_design = Turbopump_Design (P_in, P_out,T_in, mdot, rho, P_vapor, eff, cp, fluid, type)
 
 g = 9.81; % costante (accelerazione gravitazionale) [m/s^2]
 Dp = P_out - P_in ;% salto di pressione richiesto a cavallo della pompa [Pa]

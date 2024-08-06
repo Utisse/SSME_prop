@@ -1,4 +1,4 @@
-function [A_t, epsilon, L, F, eps, I_sp,] = combustion_chamber_design(P_c, P_e, gamma_gc, rho_gc, T_gc, mdot, eff, R, M, L_star, A_c)
+function [A_t, epsilon, L, F, eps, I_sp] = combustion_chamber_design(P_c, P_e, gamma_gc, rho_gc, T_gc, mdot, eff, R, M, L_star, A_c)
     % Costanti
     c_star = 4.440; % m/s velocità caratteristica -> da calcolare
     % Calcoli intermedi
@@ -14,7 +14,7 @@ function [A_t, epsilon, L, F, eps, I_sp,] = combustion_chamber_design(P_c, P_e, 
     D_t = 2 * sqrt(A_t/pi);
     
     % Calcolo area totale del combustore (A_c)
-    epsilon = ((1./M) * (( 2 ./(gamma_gs + 1).*(1+ ((gamma_gs - 1)./2) * M^2))^((gamma_gs + 1)/(2*(gamma_gs-1)))) ;
+    epsilon = ((1./M) * (( 2 ./(gamma_gs + 1).*(1+ ((gamma_gs - 1)./2) * M^2))^((gamma_gs + 1)/(2*(gamma_gs-1))))) ;
     
     % Calcolo temperatura all'efflusso (T_e)
     T_e = (1+ (((gamma_gc - 1)/2)*(M^2)));
