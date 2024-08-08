@@ -39,7 +39,16 @@ The launch system consists of three RS-25 (\acrshort{ssme}) and two additional \
 The purpose of this report is to initially size the real \acrfull{ssme} and then, based on the total impulse and burning time of this engine, to resize the engine while changing the fuel from \acrlong{lh2} to \acrfull{lch4}. 
 This analysis anticipates a simplification of the system components and a reduction in the mass of the \acrfull{et} given that methane has a much higher density than hydrogen. Additionally, the storage temperature of methane is very similar to that of oxygen, which could help avoid issues related to thermal exchange between the fuel and oxidizer tanks.
 The path followed in this report involved taking upstream and downstream pressures of each component, the inlet temperatures to the various components, and the mass flow rates of the fuel and oxidizer. Using these parameters, the turbopumps, injectors, combustion chamber, nozzle, and \acrlong{et} were appropriately sized through MATLAB. For the engine's performance analysis, NASA's CEA software was utilized. Subsequently, by observing these performances and using the burning time, O/F ratio, total engine impulse, and combustion chamber pressure as starting points, the engine was resized for the new fuel \acrshort{lch4} by working backward from these parameters.
-\section{SSME original fuel analysis}
+\section{Staged combustion cycle description}
+The Stage Combustion Cycle used in the Space Shuttle Main Engine (SSME) is a highly efficient and intricate system specifically designed for maximum performance.
+In the SSME, this cycle involves the partial combustion of both liquid hydrogen (fuel) and liquid oxygen (oxidizer) in separate preburners. 
+The preburners produce hot, high-pressure, fuel-rich gases that drive the engine's turbopumps, which in turn feed the remaining propellants into the main combustion chamber at extremely high pressures.
+What sets the SSME apart is its use of a closed-cycle stage combustion process, where all the exhaust gases from the preburners are directed into the main combustion chamber, ensuring that no energy is wasted.
+This results in very high efficiency, with the SSME achieving one of the highest specific impulses of any rocket engine.
+The high pressures and temperatures involved in this cycle make it extremely complex, but they also enable the SSME to deliver the power needed for the Space Shuttle's demanding missions.
+
+
+
 
 As stated in \cref{intro} the original \acrshort{ssme} cycle uses \acrlong{lh2} and \acrlong{lox}. After being withdrawn from the \acrfull{et} both the fuel and the oxidizer go through a \acrfull{lptp}, a \acrfull{hptp} and a preburner before meeting in the combustion chamber. What follows is an analysis of every turbomachine of the cycle.
 \begin{figure}
