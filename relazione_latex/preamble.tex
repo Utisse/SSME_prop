@@ -35,6 +35,11 @@
 \usepackage{pdfpages}
 \usepackage{xcolor}
 \usepackage{transparent}
+
+\usepackage[acronym]{glossaries}
+
+\makeglossaries
+
 \newcommand{\incfig}[2]{%
     \ifthenelse{\isempty{#2}}{%
         \def\svgwidth{.75\columnwidth}
@@ -43,12 +48,13 @@
     }%
     \import{./figures/}{#1.pdf_tex}
 }
+
 % PACKAGES FOR MATH
 \usepackage{amsmath}
 %\usepackage{siunitx}
 % PACKAGES FOR REFERENCES & BIBLIOGRAPHY
 \usepackage[colorlinks=true,linkcolor=blue!40!black,anchorcolor=black,citecolor=black,filecolor=black,menucolor=black,runcolor=black,urlcolor=black]{hyperref} % Adds clickable links at references
-\usepackage[italian]{cleveref}
+\usepackage[english]{cleveref}
 \pdfsuppresswarningpagegroup=1
 %-------------------------------------------------------------------------
 %	NEW COMMANDS DEFINED
@@ -152,12 +158,12 @@
 % \newpage}
 % \makeatother
 %  end of redefinition  ===============================  \pdfsuppresswarningpagegroup=1
-\logo{../download.png}
+\logo{PoliLogo.svg}
 \author{Autori del paper} % TODO aggiungi nomi 
 \newcommand{\myimage}{\includegraphics[width=0.5\textwidth]{PoliLogo.svg}}
 \newcommand{\mytitlepage}[1]{%
    \begin{center}
-       \myimage{}
+       \myimage
        \vspace{1cm} % Aggiungi spazio tra l'immagine e il titolo
        \LARGE #1
    \end{center}
