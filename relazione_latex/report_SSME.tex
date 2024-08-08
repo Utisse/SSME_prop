@@ -40,6 +40,15 @@ The purpose of this report is to initially size the real \acrfull{ssme} and then
 This analysis anticipates a simplification of the system components and a reduction in the mass of the \acrfull{et} given that methane has a much higher density than hydrogen. Additionally, the storage temperature of methane is very similar to that of oxygen, which could help avoid issues related to thermal exchange between the fuel and oxidizer tanks.
 The path followed in this report involved taking upstream and downstream pressures of each component, the inlet temperatures to the various components, and the mass flow rates of the fuel and oxidizer. Using these parameters, the turbopumps, injectors, combustion chamber, nozzle, and \acrlong{et} were appropriately sized through MATLAB. For the engine's performance analysis, NASA's CEA software was utilized. Subsequently, by observing these performances and using the burning time, O/F ratio, total engine impulse, and combustion chamber pressure as starting points, the engine was resized for the new fuel \acrshort{lch4} by working backward from these parameters.
 
+As stated in \cref{intro} the original \acrshort{ssme} cycle uses \acrlong{lh2} and \acrlong{lox}. After being withdrawn from the \acrfull{et} both the fuel and the oxidizer go through a \acrfull{lptp}, a \acrfull{hptp} and a preburner before meeting in the combustion chamber. What follows is an analysis of every turbomachine of the cycle.
+\begin{figure}
+	\centering
+ \includegraphics[width=.75\textwidth]{ssme_ciclo}
+	\caption{A functional diagram showing the flow of propellant through an RS-25 engine.}
+	\label{fig:ssme_cycle}
+\end{figure}
+\Cref{fig:ssme_cycle} is missing some components, such as the pogo oscillation suppression system accumulator, mounted before the oxidizer \acrshort{hptp}. However this goes beyond the scope of our analysis and will be disregarded.
+
 \subsection{Introduction to the staged combustion cycle}
 The Stage Combustion Cycle used in the Space Shuttle Main Engine (SSME) is a highly efficient and intricate system specifically designed for maximum performance.
 In the SSME, this cycle involves the partial combustion of both liquid hydrogen (fuel) and liquid oxygen (oxidizer) in separate preburners. 
@@ -68,7 +77,36 @@ The choice between liquid hydrogen and liquid methane depends on the specific re
 Hydrogen offers higher efficiency and superior performance in rocket engines but comes with significant challenges in terms of storage and handling.
 Methane, on the other hand, provides advantages in terms of density and ease of handling but at the cost of lower engine efficiency and performance. 
 
-\section{
+\section{Problem analyis}
+\subsection{Classic RS-25}
+\subsubsection{Performances}
+\subsubsection{External Tank}
+\subsubsection{Turbopumps}
+\subsubsubsection{LPFTP}
+\subsubsubsection{HPFTP}
+\subsubsubsection{LPOTP}
+\subsubsubsection{HPOTP}
+\subsubsection{Preburners}
+\subsubsubsection{Fuel preburner}
+\subsubsubsection{Oxidizer preburner}
+\subsubsection{Combustion chamber}
+\subsubsection{Nozzle}
+\subsection{Modified RS-25}
+\subsubsection{Performances}
+\subsubsection{External Tank}
+\subsubsection{Turbopumps}
+\subsubsubsection{LPFTP}
+\subsubsubsection{HPFTP}
+\subsubsubsection{LPOTP}
+\subsubsubsection{HPOTP}
+\subsubsection{Preburners}
+\subsubsubsection{Fuel preburner}
+\subsubsubsection{Oxidizer preburner}
+\subsubsection{Combustion chamber}
+\subsubsection{Nozzle}
+
+\section{Conclusions}
+
 
 
 
