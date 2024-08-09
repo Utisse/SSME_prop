@@ -23,6 +23,7 @@ clear;clc;close all;
     LH.Tpress =   255.3722;
     LH.Ppress =    2.1849e+07; %un po' altino ma probabilmente ok
     LH.rho = 71.09070627519642;
+    LH.rhopress = 18.00585015821076;
     LH.pressure = 225e3;
     LH.volume = LH.m/LH.rho;
     LH.cp = 9673.283384191343;
@@ -37,6 +38,7 @@ clear;clc;close all;
     ox1.name = "Ossigeno (caso LOX/LH2)";
     ox1.m = LH.m * of_1;
     ox1.rho = 1142.4497675514076; %[kg/m3]
+    ox1.rhopress = 199.34724639100787;
     ox1.temp = 90.19;
     ox1.Tpress = 448.7056;
     ox1.Ppress = 2.4607e+07;
@@ -56,6 +58,7 @@ clear;clc;close all;
     ch4.name = "Metano";
     ch4.m = m_prop_2/(1 + of_2);
     ch4.rho = 439.01; %[kg/m3]
+    ch4.rhopress = 102.82178788656677
     ch4.temp = 100;
     ch4.Tpress = 448.7056;
     ch4.Ppress = 2.4607e+07;
@@ -74,6 +77,7 @@ clear;clc;close all;
     ox2.name = "Ossigeno (caso LOX/CH4)";
     ox2.m = ch4.m * of_2;
     ox2.rho = 1142.4497675514076; %[kg/m3]
+    ox2.rhopress = 199.34724639100787;
     ox2.temp = 90.19;
     ox2.Tpress = 448.7056;
     ox2.Ppress = 2.4607e+07;
