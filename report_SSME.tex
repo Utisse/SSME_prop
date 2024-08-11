@@ -875,15 +875,6 @@ The other starting points are the burning time of the original engine, the O/F o
 \subsubsection{Turbopumps}
 Comparing the performance data from the analysed engine with the real data for the actual RS-25  reveals notable differences, reflecting the impact of different design assumptions and operational conditions.
 
-For the low-pressure fuel turbopump (LPFTP), the hypothetical design requires a power of 2.451 MW, while the real system demands approximately 2.484 MW. The flow rates and operating speeds are similar, with the hypothetical system operating at slightly higher speeds (15,319.85 rpm vs. 15,400 rpm). The real system’s pump operates at lower pressures, which translates to a lower power demand in practice.
-
-In the high-pressure fuel turbopump (HPFTP), the hypothetical system demands 53.544 MW, significantly higher than the real system’s 41.048 MW. The real system operates with a more efficient pressure and speed profile, with the hypothetical design showing a much higher power requirement and slightly different flow rates.Those errors attributable to the conditions of the supercritical fluid that necessitated a different and specific analysis of this pump.
-
-For the low-pressure oxidizer turbopump (LPOTP), the hypothetical design shows a power output of 2.724 MW, compared to 1.206 MW in the real system. This difference is partly due to the higher operating speeds in the hypothetical design (15,319.85 rpm vs. 5,050 rpm), which indicate a more energy-intensive approach in the hypothetical system.
-
-The high-pressure oxidizer turbopump (HPOTP) in the hypothetical design produces 17.528 MW, closely aligned with the real system’s 17.076 MW. However, the operating speeds are similar, with slight differences in flow rates and efficiency.
-
-Overall, the hypothetical design assumes higher power requirements and speeds compared to the real system. This reflects the influence of the design assumptions and operational conditions used in the theoretical analysis, illustrating the practical considerations and adjustments needed when transitioning from theoretical models to real-world applications.
 
 \begin{table}[H]
 \centering
@@ -1239,7 +1230,8 @@ $L_c$ [m] & 0.31 \\ \hline
          & \textbf{LPFTP} & \textbf{HPFTP}  & \textbf{LPOTP} & \textbf{HPOTP}\\
          $P_{in}$ [MPa] & 0.2 & 1.723 &  0.69 & 2.62\\
          $P_{out}$ [MPa] & 1.98 & 41.7 & 2.875 & 27.88\\
-         $T_{in}$ [K] & 20.27 & 23.19
+         $T_{in}$ [K] & 20.27 & 23.19 & 90.37 & 93\\
+         $m$
     \end{tabular}
     \caption{Caption}
     \label{tab:my_label}
