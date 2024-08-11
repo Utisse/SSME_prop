@@ -5,11 +5,17 @@
 %%%   DRACULA THEME
 %%%
 %\usepackage{/home/lorenzo/latex_dracula/draculatheme}
-\documentclass[11pt]{article}
+\documentclass{article}
 %PACKAGES FOR TITLES
 \usepackage{titlesec}
 \usepackage{color}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage[table]{xcolor}
 \usepackage{titling}
+\usepackage{nomencl}
+\usepackage{biblatex} %Imports biblatex package
+\addbibresource{bibliography.bib} %Import the bibliography file
 
 % PACKAGES FOR LANGUAGE AND FONT
 \usepackage[utf8]{inputenc}
@@ -164,19 +170,19 @@
 % \newpage}
 % \makeatother
 %  end of redefinition  ===============================  \pdfsuppresswarningpagegroup=1
-\logo{PoliLogo.svg}
+\logo{PoliLogo.jpg}
 \author{Palusci Luca
 	\\ 
 	10730959 
 \and
 	 Pasqui Lorenzo 
 	\\
- 10703226
+        10703226
 	\\
  \and
 	Stellacci Andrea 
 	\\ 
-	Codice Persona: 
+	10724258 
 	\\
  \and
 	Sharmoukh Carlo 
@@ -185,7 +191,7 @@
  }
  
 	\date{11 Agosto 2024}
-\newcommand{\myimage}{\includegraphics[width=0.5\textwidth]{PoliLogo.svg}}
+\newcommand{\myimage}{\includegraphics[width=0.2\textwidth]{relazione_latex/figures/PoliLogo.jpg}}
 \newcommand{\mytitlepage}[1]{%
    \begin{center}
        \myimage
