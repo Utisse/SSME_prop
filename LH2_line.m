@@ -1,6 +1,6 @@
 clc;
 close all ;
-clear all ;
+clear;
 
 
 % 0 -> 1 : LOW PRESSURE FUEL TURBOPUMP (PUMP)
@@ -44,6 +44,7 @@ disp("Testa della pompa = " + tp_design_LPFP.head_m + " m");
 % PER LA VELOCITA' DI ROTAZIONE DELLE POMPE HO FISSATO QUELLA REALE A
 % 34360RPM E IN QUESTO CASO VALUTIAMO LA VELOCITA' SPECIFICA PER OGNI
 % STADIO. SEMPRE PER PROBLEMI RELATIVI AL FATTO DEL FLUIDO SUPERCRITICO
+%% primo stadio
 T1 = 23.19 ;
 p1 =1.723690e6 ;
 p_s2 = 4.96e6;
@@ -79,7 +80,7 @@ mdot = 70.4 ;
 rho_s3 = 71.117 ;
 cp_s3 = 22.848e3 ;
 cv_s3= 13.353e3 ;
-gamma_s3  = cp_s3/cv_s3 ;
+gamma_s3  = 11/cv_s3 ;
 eff = 0.75 ;
 pvap = 9e4 ;
 HPFP_s3 = pompa_idrogeno(p_s3, p_2,T_s3, mdot, rho_s3, pvap, eff, cp_s3);
