@@ -20,6 +20,7 @@ clear;clc;close all;
     LH.Tpress =   255.3722;
     LH.Ppress =    2.1849e+07; %un po' altino ma probabilmente ok
     LH.rho = 71.09070627519642;
+    LH.rhopress = 18.00585015821076;
     LH.pressure = 225e3;
     LH.volume = LH.m/LH.rho;
     LH.cp = 9673.283384191343;
@@ -27,12 +28,13 @@ clear;clc;close all;
     LH.gamma = LH.cp/LH.cv;
     LH.gammaPress = 1.4427; 
     LH.massa_molare =  1.00784*2;
-    LH.tank = Tank(0,0,0,0,0);
+    %LH.tank = Tank(0,0,0,0,0);
 
 
     ox.name = "Ossigeno";
     ox.m = LH.m * of;
     ox.rho = 1142.4497675514076; %[kg/m3]
+    ox.rhopress = 199.34724639100787;
     ox.temp = 90.19;
     ox.Tpress = 448.7056;
     ox.Ppress = 2.4607e+07;
@@ -43,7 +45,7 @@ clear;clc;close all;
     ox.cv = 929.8734290792967;
     ox.gamma = ox.cp/ox.cv;
     ox.massa_molare = 32; %[kg/kmol]
-    ox.tank = Tank(0,0,0,0,0);
+    %ox.tank = Tank(0,0,0,0,0);
 
 
 
@@ -95,7 +97,7 @@ clear;clc;close all;
             press_mass = press_volume(iter) * p.pressure / (Ru * T_f);
             
             % Calcoliamo il nuovo volume del gas pressurizzante
-            press_volume(iter) = press_mass /p.rho;
+            press_volume(iter) = press_mass /p.rhopress;
             % Verifichiamo la condizione di convergenza
             check = abs(press_volume(iter) - press_volume(iter-1));
             if check < 1e-10|| iter > maxiter
