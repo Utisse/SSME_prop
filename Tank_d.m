@@ -58,11 +58,11 @@ clear;clc;close all;
     ch4.name = "Metano";
     ch4.m = m_prop_2/(1 + of_2);
     ch4.rho = 439.01; %[kg/m3]
-    ch4.rhopress = 102.82178788656677
+    ch4.rhopress = 102.82178788656677;
     ch4.temp = 100;
     ch4.Tpress = 448.7056;
     ch4.Ppress = 2.4607e+07;
-    ch4.gammaPress = 1.5102; 
+    ch4.gammaPress = 1.4001; 
     ch4.pressure = .68e6;
     ch4.volume = ch4.m/ch4.rho;
     ch4.cp = 3.4071e3;
@@ -95,7 +95,7 @@ clear;clc;close all;
     % In realtà questi due serbatoi sono più grandi poichè 
     % non tutto il propellente viene usato a fini propulsivi (i.e. va in
     % camera di combustione).
-    tanks = [[ox1 LH];[ch4 ox2]];
+    tanks = [[ox1 LH];[ox2 ch4]];
     % Mantengo costante il raggio che suppongo essere tale
     % per questioni strutturali
     r = 8.4/2; %[m] 
@@ -103,8 +103,8 @@ clear;clc;close all;
                  % fattore di sicurezza pari a due
     %% VALORI strutturali del serbatoio
 
-    F_all =300e6; %Pa ATTENZIONE VALORE PER Al 2219
-    rho =2800; % ATTENZIONE VALORE PER Al 2219
+    F_all =170e6; %Pa ATTENZIONE VALORE PER Al 2219
+    rho =2600; % ATTENZIONE VALORE PER Al 2219
     
 
     
@@ -116,15 +116,15 @@ clear;clc;close all;
         disp("---- Tank "+ t+ " -----");
         for i = 1:size(tanks,2) % Eseguo il calcolo per ogni propellente
         p = tanks(t,i);
-        %disp(" --- " + p.name + " ---");
-        %disp("Volume propulsivo = " + p.volume);
+        disp(" --- " + p.name + " ---");
+        disp("Volume propulsivo = " + p.volume);
         % In teoria il volume del propellente =/= volume serbatoio
         % ma somma di V_prop + V_ullage (espansione) + V_boil + V_trapped (feed lines).
         % Come lo calcolo? per ora metto V_tot = V_prop + .02 * V_prop (vedi pagina 288)
         % considerando dunque solo i primi due termini
         %V_tot = V_prop + 0.02 *V_prop;
         p.volume= 1.02* p.volume;
-        %disp("Volume totale escluso pressurizzante = " + p.volume);
+        disp("Volume totale escluso pressurizzante = " + p.volume);
         maxiter = 1000;
         press_volume = zeros(maxiter,1);
         iter = 2;
@@ -145,7 +145,7 @@ clear;clc;close all;
                 check = abs(press_volume(iter) - press_volume(iter-1));
                 if check < 1e-10|| iter > maxiter
                     %disp("Convergiamo a iterazione = " + iter);
-                    %disp("Volume pressurizzante = " + press_volume(iter));
+                    disp("Volume pressurizzante = " + press_volume(iter));
                     %disp("Temperatura finale = " + T_f)
                     %disp("Differenza finale = "+ check)
                     break;
